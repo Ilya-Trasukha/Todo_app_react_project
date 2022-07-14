@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
+import { Todo } from "src/types";
+import { v4 as uuidv4 } from 'uuid';
 import MyButton from "./UI/button/MyButton";
 import MyInput from "./UI/input/MyInput";
-const PostForm = ({ create }) => {
+const PostForm: FC<{create: (todo: Todo)=> void}> = ({ create }) => {
   const [post, setPost] = useState({ title: "", body: "" });
 
-  const addNewPost = (e) => {
+  const addNewPost = (e: any) => {
     e.preventDefault();
     const newPost = {
       ...post,
-      id: Date.now()
+      id: uuidv4()
     };
     setPost({ title: "", body: "" });
     create(newPost);
@@ -17,13 +19,13 @@ const PostForm = ({ create }) => {
     <form>
       <MyInput
         value={post.title}
-        onChange={(e) => setPost({ ...post, title: e.target.value })}
+        onChange={(e: any) => setPost({ ...post, title: e.target.value })}
         type="text"
         placeholder="Название поста"
       />
       <MyInput
         value={post.body}
-        onChange={(e) => setPost({ ...post, body: e.target.value })}
+        onChange={(e: any) => setPost({ ...post, body: e.target.value })}
         type="text"
         placeholder="Описание"
       />
