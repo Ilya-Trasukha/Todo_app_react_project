@@ -18,4 +18,11 @@ export default class TodoService {
         localStorage.setItem('todos', JSON.stringify(newTodosList))
         return newTodosList;
     }
+
+    static addCategory(name: string) {
+        const prevCategory = localStorage.getItem('category')
+        const category = prevCategory ? JSON.parse(prevCategory) : []
+        localStorage.setItem('category', JSON.parse(category))
+        return category
+    }
 }
