@@ -10,7 +10,7 @@ type Props = {
 }
 const PostList: FC<Props> = ({ posts, title, remove }) => {
   if (!posts.length) {
-    return <h1 className="not_found">Посты не найдены!</h1>;
+    return <h1 className="not_found">Todos not found!</h1>;
   }
   return (
     <div>

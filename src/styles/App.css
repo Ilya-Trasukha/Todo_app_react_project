@@ -13,10 +13,24 @@
 .post {
   display: flex;
   padding: 15px;
-  border: 2px solid teal;
+  border: 2px solid #1976d2;
+  border-radius: 10px;
   margin-top: 15px;
   justify-content: space-between;
   align-items: center;
+}
+.post:hover {
+  transition: box-shadow .4s ease-in-out;
+  box-shadow: 0 0 10px #1976d2, 0 0 20px #1976d2, 0 0 40px #1976d2, 0 0 50px #1976d2;
+}
+.add_post {
+  width: 100%;
+  padding: 5px 15px;
+  margin: 5px 0;
+}
+.post__btns {
+  display: flex;
+  justify-content: space-between;
 }
 .post_top {
   text-align: center;
@@ -41,3 +55,4 @@
   transform: translateX(-350px);
   transition: all 500ms ease-in;
 }
+

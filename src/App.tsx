@@ -5,7 +5,8 @@ import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import "./styles/App.css";
 import MyModal from "./components/UI/MyModal/MyModal";
-import MyButton from "./components/UI/button/MyButton";
+
+import Button from '@mui/material/Button';
 import { usePosts } from "./components/hooks/usePosts";
 import TodoService from "./services/todosService"
 import { Todo } from "./types";
@@ -34,10 +35,9 @@ function App() {
   
   return (
     <div className="App">
-      {/* <button onClick={fetchPosts}>GET POSTS</button> */}
-      <MyButton className="add" onClick={() => setModal(true)}>
-        Добавить пост
-      </MyButton>
+      <Button variant="contained" className="add" onClick={() => setModal(true)}>
+        Add Todo
+      </Button>
       <MyModal visible={modal} setVisible={setModal}>
         <PostForm create={createPost} />
       </MyModal>
@@ -45,7 +45,7 @@ function App() {
       <PostList
         remove={removePost}
         posts={sortedAndSearchedPosts}
-        title="Посты про JS"
+        title="My Todos"
       />
     </div>
   );

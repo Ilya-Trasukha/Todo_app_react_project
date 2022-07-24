@@ -1,23 +1,26 @@
 import React from "react";
 import MyInput from "./UI/input/MyInput";
 import MySelect from "./UI/select/MySelect";
+import Input from '@mui/material/Input';
+
 const PostFilter = ({ filter, setFilter }) => {
   return (
     <div>
-      <MyInput
+      <Input
         value={filter.query}
         onChange={(e) => setFilter({ ...filter, query: e.target.value })}
-        placeholder="Поиск..."
+        placeholder="Search..."
       />
+      <br/>
       <MySelect
         value={filter.sort}
         onChange={(selectedSort) =>
           setFilter({ ...filter, sort: selectedSort })
         }
-        defaultValue="Сортировка по"
+        defaultValue="Filter by"
         options={[
-          { value: "title", name: "По названию" },
-          { value: "body", name: "По описанию" }
+          { value: "title", name: "By title" },
+          { value: "body", name: "By description" }
         ]}
       />
     </div>
