@@ -18,6 +18,16 @@ export default class TodoService {
         localStorage.setItem('todos', JSON.stringify(newTodosList))
         return newTodosList;
     }
+    static toggleImportantTodo(id: string, value: boolean) {
+        const todos = localStorage.getItem('todos');
+        const prevTodos = JSON.parse(todos as string);
+        const newTodosList = prevTodos.map((todo: Todo) => {
+            if (todo.id === id) return {...todo, important: value}
+            return todo
+        })
+        localStorage.setItem('todos', JSON.stringify(newTodosList))
+        return newTodosList;
+    }
 
     static addCategory(name: string) {
         const prevCategory = localStorage.getItem('category')

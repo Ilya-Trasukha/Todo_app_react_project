@@ -31,7 +31,12 @@ function App() {
     const todoList = TodoService.removeTodo(id);
     setPosts(todoList)
   };
-  console.dir(sortedAndSearchedPosts);
+  const toggleImportantPost = (id: string, value: boolean) => {
+    
+    const todos = TodoService.toggleImportantTodo(id, value)
+    setPosts(todos)
+  };
+  
   
   return (
     <div className="App">
@@ -46,6 +51,7 @@ function App() {
         remove={removePost}
         posts={sortedAndSearchedPosts}
         title="My Todos"
+        toggleImportant={toggleImportantPost}
       />
     </div>
   );

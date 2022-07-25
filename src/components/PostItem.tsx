@@ -5,7 +5,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import Switch from '@mui/material/Switch';
 
-const PostItem: FC<{todo: Todo, remove: Function, number: number}> = ({todo, remove, number}) => {
+const PostItem: FC<{
+  todo: Todo, 
+  remove: Function, 
+  toggleImportantPost: Function, 
+  number: number
+}> = ({todo, remove, toggleImportantPost, number}) => {
+  console.log(todo);
+  
   return (
     <div className="post">
       <div className="post__content">
@@ -16,10 +23,12 @@ const PostItem: FC<{todo: Todo, remove: Function, number: number}> = ({todo, rem
       </div>
       <div className="post__btns">
         <div>
-        <Switch color="warning"/>
+          <Switch onChange={(_e: any, value: boolean) => {
+            toggleImportantPost(todo.id, value)
+          }} color="warning" checked={todo.important}/>
         </div>
         <div>
-        <Checkbox/>
+        <Checkbox  value={todo.done}/>
         </div>
         <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => remove(todo.id)}>
           <strong>Delete</strong>

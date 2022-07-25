@@ -7,8 +7,9 @@ type Props = {
   posts: Todo[]
   title: string
   remove: Function
+  toggleImportant: Function
 }
-const PostList: FC<Props> = ({ posts, title, remove }) => {
+const PostList: FC<Props> = ({ posts, title, remove, toggleImportant }) => {
   if (!posts.length) {
     return <h1 className="not_found">Todos not found!</h1>;
   }
@@ -18,7 +19,11 @@ const PostList: FC<Props> = ({ posts, title, remove }) => {
       <TransitionGroup>
         {posts.map((todo, index) => (
           <CSSTransition key={todo.id} timeout={500} classNames="post">
-            <PostItem remove={remove} number={index + 1} todo={todo} />
+            <PostItem 
+              remove={remove} 
+              number={index + 1} 
+              todo={todo} 
+              toggleImportantPost={toggleImportant} />
           </CSSTransition>
         ))}
       </TransitionGroup>

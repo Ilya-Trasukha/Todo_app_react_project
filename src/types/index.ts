@@ -5,5 +5,5 @@ export type Todo = {
     dedline?: string
     done: boolean
     important: boolean
-    category: string[]
+    // category: string[]
 }

@@ -4,8 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+type TodoWithoutId = Omit<Todo, 'id'>
+const initPost: TodoWithoutId = { title: "", body: "", important: false, done: false }
+
 const PostForm: FC<{create: (todo: Todo)=> void}> = ({ create }) => {
-  const [post, setPost] = useState({ title: "", body: "" });
+  const [post, setPost] = useState<TodoWithoutId>(initPost);
 
   const addNewPost = (e: any) => {
     e.preventDefault();
@@ -13,8 +16,8 @@ const PostForm: FC<{create: (todo: Todo)=> void}> = ({ create }) => {
       ...post,
       id: uuidv4()
     };
-    setPost({ title: "", body: "" });
-    create(newPost);
+    setPost(initPost);
+    create(newPost as Todo);
   };
   return (
     <form>
@@ -34,7 +37,7 @@ const PostForm: FC<{create: (todo: Todo)=> void}> = ({ create }) => {
         onChange={(e: any) => setPost({ ...post, body: e.target.value })}
         type="text"
       />
-      <Button variant="contained" onClick={addNewPost}>Create Todo</Button>
+      <Button className="myBtn" variant="contained" onClick={addNewPost}>Create Todo</Button>
     </form>
   );
 };
