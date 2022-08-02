@@ -8,8 +8,9 @@ type Props = {
   title: string
   remove: Function
   toggleImportant: Function
+  doneTodo: Function
 }
-const PostList: FC<Props> = ({ posts, title, remove, toggleImportant }) => {
+const PostList: FC<Props> = ({ posts, title, remove, toggleImportant, doneTodo }) => {
   if (!posts.length) {
     return <h1 className="not_found">Todos not found!</h1>;
   }
@@ -22,7 +23,8 @@ const PostList: FC<Props> = ({ posts, title, remove, toggleImportant }) => {
             <PostItem 
               remove={remove} 
               number={index + 1} 
-              todo={todo} 
+              todo={todo}
+              doneTodoPost={doneTodo}
               toggleImportantPost={toggleImportant} />
           </CSSTransition>
         ))}

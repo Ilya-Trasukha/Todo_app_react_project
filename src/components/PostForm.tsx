@@ -20,8 +20,9 @@ const PostForm: FC<{create: (todo: Todo)=> void}> = ({ create }) => {
     create(newPost as Todo);
   };
   return (
-    <form>
+    <div className="add_todo">
       <TextField
+        className="field"
         id="outlined-basic" 
         label="Todo name" 
         variant="outlined"
@@ -30,6 +31,7 @@ const PostForm: FC<{create: (todo: Todo)=> void}> = ({ create }) => {
         type="text"
       />
       <TextField
+        className="field"
         id="outlined-basic" 
         label="Todo description" 
         variant="outlined"
@@ -37,8 +39,8 @@ const PostForm: FC<{create: (todo: Todo)=> void}> = ({ create }) => {
         onChange={(e: any) => setPost({ ...post, body: e.target.value })}
         type="text"
       />
-      <Button className="myBtn" variant="contained" onClick={addNewPost}>Create Todo</Button>
-    </form>
+      <Button variant="contained" onClick={addNewPost}>Create Todo</Button>
+    </div>
   );
 };
 export default PostForm;

@@ -8,13 +8,14 @@ import Switch from '@mui/material/Switch';
 const PostItem: FC<{
   todo: Todo, 
   remove: Function, 
-  toggleImportantPost: Function, 
+  toggleImportantPost: Function,
+  doneTodoPost: Function
   number: number
-}> = ({todo, remove, toggleImportantPost, number}) => {
+  }> = ({todo, remove, toggleImportantPost, doneTodoPost, number}) => {
   console.log(todo);
-  
+  const [state, setState] = useState(false)
   return (
-    <div className="post">
+    <div className={`${state ? 'post_active' : 'post'}`}>
       <div className="post__content">
         <strong>
           {number}. {todo.title}
@@ -28,7 +29,10 @@ const PostItem: FC<{
           }} color="warning" checked={todo.important}/>
         </div>
         <div>
-        <Checkbox  value={todo.done}/>
+        <Checkbox onChange={(_e: any, value: boolean) => {
+            setState(!state)
+            doneTodoPost(todo.id, value)
+          }}  checked={todo.done}/>
         </div>
         <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => remove(todo.id)}>
           <strong>Delete</strong>

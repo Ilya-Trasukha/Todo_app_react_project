@@ -32,8 +32,11 @@ function App() {
     setPosts(todoList)
   };
   const toggleImportantPost = (id: string, value: boolean) => {
-    
     const todos = TodoService.toggleImportantTodo(id, value)
+    setPosts(todos)
+  };
+  const doneTodoPost = (id: string, value: boolean) => {
+    const todos = TodoService.checkDoneTodo(id, value)
     setPosts(todos)
   };
   
@@ -52,6 +55,7 @@ function App() {
         posts={sortedAndSearchedPosts}
         title="My Todos"
         toggleImportant={toggleImportantPost}
+        doneTodo={doneTodoPost}
       />
     </div>
   );
