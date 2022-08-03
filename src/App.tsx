@@ -1,61 +1,60 @@
-import React, { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
-import PostList from "./components/PostList";
-import PostForm from "./components/PostForm";
-import PostFilter from "./components/PostFilter";
-import "./styles/App.css";
+import TodoList from "./components/TodoList";
+import TodoForm from "./components/TodoForm";
+import TodoFilter from "./components/TodoFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 
 import Button from '@mui/material/Button';
-import { usePosts } from "./components/hooks/usePosts";
+import { useTodos } from "./hooks/useTodos";
 import TodoService from "./services/todosService"
 import { Todo } from "./types";
 
 function App() {
-  const [posts, setPosts] = useState<Todo[] | []>([]);
+  const [todos, setTodos] = useState<Todo[] | []>([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
-  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const sortedAndSearchedTodos = useTodos(todos, filter.sort, filter.query);
 
-  const createPost = (newTodo: Todo) => {
-    setPosts([...posts, newTodo]);
+  const createTodo = (newTodo: Todo) => {
+    setTodos([...todos, newTodo]);
     TodoService.addTodo(newTodo)
     setModal(false);
   };
   useEffect(() => {
-    const todos = TodoService.getTodo();    
-    setPosts(todos);
+    const todos = TodoService.getTodo();
+    setTodos(todos);
   }, [])
 
-  const removePost = (id: string) => {
+  const removeTodo = (id: string) => {
     const todoList = TodoService.removeTodo(id);
-    setPosts(todoList)
+    setTodos(todoList)
   };
-  const toggleImportantPost = (id: string, value: boolean) => {
+  const toggleImportantTodo = (id: string, value: boolean) => {
     const todos = TodoService.toggleImportantTodo(id, value)
-    setPosts(todos)
+    setTodos(todos)
   };
-  const doneTodoPost = (id: string, value: boolean) => {
+  const checkDoneTodo = (id: string, value: boolean) => {
     const todos = TodoService.checkDoneTodo(id, value)
-    setPosts(todos)
+    setTodos(todos)
   };
-  
-  
+
+
   return (
     <div className="App">
       <Button variant="contained" className="add" onClick={() => setModal(true)}>
         Add Todo
       </Button>
       <MyModal visible={modal} setVisible={setModal}>
-        <PostForm create={createPost} />
+        <TodoForm create={createTodo} />
       </MyModal>
-      <PostFilter filter={filter} setFilter={setFilter} />
-      <PostList
-        remove={removePost}
-        posts={sortedAndSearchedPosts}
+      <TodoFilter filter={filter} setFilter={setFilter} />
+      <TodoList
+        todos={sortedAndSearchedTodos}
         title="My Todos"
-        toggleImportant={toggleImportantPost}
-        doneTodo={doneTodoPost}
+        remove={removeTodo}
+        toggleImportant={toggleImportantTodo}
+        doneTodo={checkDoneTodo}
       />
     </div>
   );

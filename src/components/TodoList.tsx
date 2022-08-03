@@ -1,28 +1,28 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Todo } from "src/types";
-import PostItem from "./PostItem";
+import TodoItem from "./TodoItem";
 
 type Props = {
-  posts: Todo[]
+  todos: Todo[]
   title: string
   remove: Function
   toggleImportant: Function
   doneTodo: Function
 }
-const PostList: FC<Props> = ({ posts, title, remove, toggleImportant, doneTodo }) => {
-  if (!posts.length) {
+const TodoList: FC<Props> = ({ todos, title, remove, toggleImportant, doneTodo }) => {
+  if (!todos.length) {
     return <h1 className="not_found">Todos not found!</h1>;
   }
   return (
     <div>
-      <h1 className="post_top">{title}</h1>
+      <h1 className="todo_top">{title}</h1>
       <TransitionGroup>
-        {posts.map((todo, index) => (
+        {todos.map((todo, index) => (
           <CSSTransition key={todo.id} timeout={500} classNames="post">
-            <PostItem 
-              remove={remove} 
-              number={index + 1} 
+            <TodoItem
+              remove={remove}
+              number={index + 1}
               todo={todo}
               doneTodoPost={doneTodo}
               toggleImportantPost={toggleImportant} />
@@ -32,4 +32,4 @@ const PostList: FC<Props> = ({ posts, title, remove, toggleImportant, doneTodo }
     </div>
   );
 };
-export default PostList;
+export default TodoList;

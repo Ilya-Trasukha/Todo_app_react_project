@@ -1,17 +1,26 @@
-import React from "react";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 const MySelect = ({ options, defaultValue, value, onChange }) => {
   return (
-    <select value={value} onChange={(event) => onChange(event.target.value)}>
-      <option disabled value="">
-        {defaultValue}
-      </option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
+    <FormControl variant="standard" sx={{ minWidth: 130 }}>
+      <InputLabel id="filter-label">Filter by</InputLabel>
+      <Select labelId="filter-label"
+              label="Filter by"
+              value={value}
+              autoWidth
+              onChange={(event) => onChange(event.target.value)}>
+        <MenuItem disabled
+          value="">
+          {defaultValue}
+        </MenuItem>
+          {options.map((option) => (
+        <MenuItem key={option.value}
+          value={option.value}>
           {option.name}
-        </option>
-      ))}
-    </select>
+        </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 export default MySelect;
